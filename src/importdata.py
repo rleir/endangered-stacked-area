@@ -35,10 +35,7 @@ def readFiles() -> None:
                             timestamps.append(None)
                         else:
                             year = int(sheet.cell(row, col).value)
-                            # print("yerr")
-                            # print(year)
-                            dt = datetime.datetime(year=year, month=1, day=1)
-                            timestamps.append(time.mktime(dt.timetuple()))
+                            timestamps.append(year)
 
                 else:
                     points = []
@@ -52,7 +49,8 @@ def readFiles() -> None:
                             point = [timestamps[col], count]
                             points.append(point)
                     rec["values"] = points
-                    all_data.append(rec)
+                    if not category == " Totals":
+                        all_data.append(rec)
     if transp_s_found == 0:
         print("ERR: transp sheet not found in " + input_path)
     elif transp_s_found > 1:
